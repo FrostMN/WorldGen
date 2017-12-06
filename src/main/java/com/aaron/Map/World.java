@@ -1,10 +1,9 @@
 package com.aaron.Map;
 
-import com.aaron.Size;
+import com.aaron.utilities.Size;
 
 import javax.swing.*;
 import java.awt.*;
-import java.util.Arrays;
 import java.util.Random;
 
 //import java.math.*;
@@ -22,10 +21,10 @@ public class World {
                 this.dimentions = 16;
                 break;
             case MEDIUM:
-                this.dimentions = 32;
+                this.dimentions = 18;
                 break;
             case LARGE:
-                this.dimentions = 64;
+                this.dimentions = 20;
                 break;
             default:
         }
@@ -167,4 +166,5 @@ public class World {
     public Region getRegion(int x, int y) {
         return regions[x][y];
     }
+
 }

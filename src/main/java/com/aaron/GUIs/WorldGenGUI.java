@@ -1,15 +1,14 @@
-package com.aaron;
+package com.aaron.GUIs;
 
 import com.aaron.Map.World;
+import com.aaron.utilities.Size;
 
-import javax.imageio.ImageIO;
 import javax.swing.*;
 import javax.swing.border.LineBorder;
 import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.awt.image.BufferedImage;
 import java.util.HashMap;
-import java.util.Map;
 
 public class WorldGenGUI extends JFrame{
     private JPanel rootPanel;
@@ -26,15 +25,17 @@ public class WorldGenGUI extends JFrame{
 
     private HashMap<String, Image> worldMap;
 
-    WorldGenGUI (World w) {
+    public WorldGenGUI(World w) {
         setContentPane(rootPanel);
         setPreferredSize(new Dimension(1000, 500));
-        setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+//        setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 
         this.worldData = w;
 
         pack();
         setVisible(true);
+
+        System.out.println(w.getSize());
 
         addEventListeners();
         createView(w.getSize());
@@ -51,12 +52,12 @@ public class WorldGenGUI extends JFrame{
                 createWorldView(16);
                 break;
             case MEDIUM:
-                createRegionView(32);
-                createWorldView(32);
+                createRegionView(18);
+                createWorldView(18);
                 break;
             case LARGE:
-                createRegionView(64);
-                createWorldView(64);
+                createRegionView(20);
+                createWorldView(20);
                 break;
         }
     }

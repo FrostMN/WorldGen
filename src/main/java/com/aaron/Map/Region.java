@@ -1,6 +1,6 @@
 package com.aaron.Map;
 
-import com.aaron.Size;
+import com.aaron.utilities.Size;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
@@ -12,7 +12,6 @@ public class Region {
 
     Tile[][] tiles;
 
-
     Region (Size size) {
         this.size = size;
         switch (size) {
@@ -20,14 +19,13 @@ public class Region {
                 this.dimensions = 16;
                 break;
             case MEDIUM:
-                this.dimensions = 32;
+                this.dimensions = 18;
                 break;
             default:
-                this.dimensions = 64;
+                this.dimensions = 20;
                 break;
         }
     }
-
 
     public String getMap() {
         return "";

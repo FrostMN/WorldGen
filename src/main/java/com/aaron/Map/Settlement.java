@@ -1,7 +1,7 @@
 package com.aaron.Map;
 
 
-import com.aaron.Size;
+import com.aaron.utilities.Size;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;

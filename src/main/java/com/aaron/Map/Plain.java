@@ -1,10 +1,11 @@
 package com.aaron.Map;
 
-import com.aaron.Size;
+import com.aaron.utilities.Size;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
+import java.io.File;
 
 
 public class Plain extends Region {
@@ -44,11 +45,23 @@ public class Plain extends Region {
 
     @Override
     public Image getImage() {
+        Image img;
+
+        File f = new File("src/main/java/com/aaron/images/grassTile.png");
+//        System.out.println(f.getAbsolutePath());
+//        if (f.exists()) {
+//            System.out.println("it exists");
+//        } else {
+//            System.out.println("it does not exist");
+//        }
+
         try {
-            Image img = ImageIO.read(getClass().getResource("../images/grassTile.png"));
+//            img = ImageIO.read(getClass().getResource("../images/grassTile.png"));
+            img = ImageIO.read(f);
             return img;
         } catch (Exception e) {
             System.out.println(".getImage Failed in plains");
+            System.out.println(e);
             return null;
         }
     }
