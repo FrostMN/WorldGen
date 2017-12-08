@@ -26,6 +26,7 @@ public class WorldGenOptions extends JFrame {
     private JButton saveButton;
     private JButton loadButton;
     private JButton generateSeedButton;
+    private JButton deleteButton;
 
     public WorldGenOptions() {
         setupWindow();
@@ -42,7 +43,8 @@ public class WorldGenOptions extends JFrame {
 
         // centering window taken from
         // https://stackoverflow.com/questions/144892/how-to-center-a-window-in-java
-        setLocation((Toolkit.getDefaultToolkit().getScreenSize().width  - getSize().width) / 2, (Toolkit.getDefaultToolkit().getScreenSize().height - getSize().height) / 2);
+        setLocation((Toolkit.getDefaultToolkit().getScreenSize().width  - getSize().width) / 2,
+                (Toolkit.getDefaultToolkit().getScreenSize().height - getSize().height) / 2);
     }
 
     private void addEventListeners() {

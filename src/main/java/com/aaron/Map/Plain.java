@@ -9,13 +9,17 @@ import java.io.File;
 
 
 public class Plain extends Region {
-    Tile[][] ground;
+//    private Tile[][] ground;
     Plain(Size size) {
         super(size);
+
         ground = new Tile[this.dimensions][this.dimensions];
+
+        Tile grass = new Tile(1);
+
         for (int i = 0; i < this.dimensions; i++) {
             for (int j = 0; j < this.dimensions; j++) {
-                ground[i][j] = new Tile(1);
+                ground[i][j] = grass;
             }
         }
     }
@@ -37,26 +41,14 @@ public class Plain extends Region {
         return map;
     }
 
-    @Override
-    public ImageIcon getIcon() {
-        Image img = getImage();
-        return new ImageIcon(img.getScaledInstance(16,16, Image.SCALE_DEFAULT));
-    }
 
     @Override
-    public Image getImage() {
+    public Image getRegionImage() {
         Image img;
 
         File f = new File("src/main/java/com/aaron/images/grassTile.png");
-//        System.out.println(f.getAbsolutePath());
-//        if (f.exists()) {
-//            System.out.println("it exists");
-//        } else {
-//            System.out.println("it does not exist");
-//        }
 
         try {
-//            img = ImageIO.read(getClass().getResource("../images/grassTile.png"));
             img = ImageIO.read(f);
             return img;
         } catch (Exception e) {
@@ -65,12 +57,4 @@ public class Plain extends Region {
             return null;
         }
     }
-
-//    @Override
-//    public ImageIcon getTileIcon(int i, int j) {
-//        Tile t = super.tiles[i][j];
-//        return t.getIcon();
-//    }
-
-
 }

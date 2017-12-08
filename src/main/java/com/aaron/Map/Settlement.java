@@ -38,22 +38,22 @@ public class Settlement extends Region {
         }
     }
 
-    @Override
-    public ImageIcon getIcon() {
-        Image img = getImage();
-        return new ImageIcon(img.getScaledInstance(16,16, Image.SCALE_DEFAULT));
-    }
+//    @Override
+//    public ImageIcon getIcon() {
+//        Image img = getImage();
+//        return new ImageIcon(img.getScaledInstance(16,16, Image.SCALE_DEFAULT));
+//    }
 
-    @Override
-    public Image getImage() {
-        try {
-            Image img = ImageIO.read(getClass().getResource("../images/townTile.png"));
-            return img;
-        } catch (Exception e) {
-            System.out.println(".getIMage Failed in plains");
-            return null;
-        }
-    }
+//    @Override
+//    public Image getImage() {
+//        try {
+//            Image img = ImageIO.read(getClass().getResource("../images/townTile.png"));
+//            return img;
+//        } catch (Exception e) {
+//            System.out.println(".getIMage Failed in plains");
+//            return null;
+//        }
+//    }
 
 
 }

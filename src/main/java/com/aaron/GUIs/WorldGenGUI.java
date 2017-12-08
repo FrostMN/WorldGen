@@ -1,11 +1,14 @@
 package com.aaron.GUIs;
 
+import com.aaron.Map.Region;
 import com.aaron.Map.World;
 import com.aaron.utilities.Size;
 
 import javax.swing.*;
 import javax.swing.border.LineBorder;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.image.BufferedImage;
 import java.util.HashMap;
@@ -27,7 +30,7 @@ public class WorldGenGUI extends JFrame{
 
     public WorldGenGUI(World w) {
         setContentPane(rootPanel);
-        setPreferredSize(new Dimension(1000, 500));
+        setPreferredSize(new Dimension(1200, 800));
 //        setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 
         this.worldData = w;
@@ -41,6 +44,10 @@ public class WorldGenGUI extends JFrame{
         createView(w.getSize());
         pack();
 
+        // centering window taken from
+        // https://stackoverflow.com/questions/144892/how-to-center-a-window-in-java
+        setLocation((Toolkit.getDefaultToolkit().getScreenSize().width  - getSize().width) / 2,
+                (Toolkit.getDefaultToolkit().getScreenSize().height - getSize().height) / 2);
     }
 
     private void createView(Size size) {
@@ -75,15 +82,20 @@ public class WorldGenGUI extends JFrame{
             for (int j = 0; j < dimensions; j++) {
                 JButton b = new JButton();
                 b.setMargin(buttonMargin);
-                ImageIcon icon = new ImageIcon(new BufferedImage(32, 32, BufferedImage.TYPE_INT_ARGB));
-//                ImageIcon icon = worldData.getRegion(0, 0).getTileIcon(i, j);
-                b.setIcon(icon);
 
-                if ((j % 2 == 1 && i % 2 == 1) || (j % 2 == 0 && i % 2 == 0)) {
-                    b.setBackground(Color.WHITE);
-                } else {
-                    b.setBackground(Color.BLACK);
-                }
+                String cords = "Y: " + i + ", Y: " + j;
+
+                Image tileImage = worldData.getRegion(0, 0).getTileImage(i, j);
+                Image scaledTile = tileImage.getScaledInstance(32,32, Image.SCALE_DEFAULT);
+                ImageIcon icon = new ImageIcon( scaledTile );
+
+                b.setIcon(icon);
+                b.addActionListener(new ActionListener() {
+                    @Override
+                    public void actionPerformed(ActionEvent e) {
+                        System.out.println( "region: " + cords );
+                    }
+                });
                 regionViewSquares[i][j] = b;
             }
         }
@@ -110,17 +122,26 @@ public class WorldGenGUI extends JFrame{
                 JButton b = new JButton();
                 b.setMargin(buttonMargin);
                 try {
-
-
                     Image img = worldData.getRegionImage(i, j);
-
-
-//                    Image img = ImageIO.read(getClass().getResource("images/waterTile.png"));
                     ImageIcon icon = new ImageIcon(img.getScaledInstance(16,16, Image.SCALE_DEFAULT));
 
-//                    ImageIcon icon = worldData.getRegionIcon(i, j);
+                    String cords = "Y: " + i + ", Y: " + j;
+
 
                     b.setIcon(icon);
+
+                    int x = i;
+                    int y = j;
+
+                    b.addActionListener(new ActionListener() {
+                        @Override
+                        public void actionPerformed(ActionEvent e) {
+                            System.out.println( "World: " + cords );
+
+                            // TODO implement this method
+                            setRegionView(x, y);
+                        }
+                    });
                     worldViewSquares[i][j] = b;
 
                     worldMap.put("world_" + i + "_" + j, img);
@@ -140,6 +161,74 @@ public class WorldGenGUI extends JFrame{
             }
         }
     }
+
+    private void setRegionView(Integer x, Integer y) {
+        int dimensions = worldData.getDimensions();
+
+        region.removeAll();
+
+        region.setLayout(new GridLayout(dimensions, dimensions));
+        region.setBorder(new LineBorder(Color.BLACK));
+
+        regionViewSquares = new JButton[dimensions][dimensions];
+        regionViewImage = new Image[dimensions][dimensions];
+
+
+        Region r = worldData.getRegion(x, y);
+
+        System.out.println(r);
+
+        System.out.println(r.getMap());
+
+        System.out.println(r.getTileType(x, y));
+
+
+        System.out.println("in setRegionView(x, y)");
+
+        Insets buttonMargin = new Insets(0,0,0,0);
+        for (int i = 0; i < dimensions; i++) {
+            for (int j = 0; j < dimensions; j++) {
+                JButton b = new JButton();
+                b.setMargin(buttonMargin);
+
+                String cords = "Y: " + i + ", Y: " + j;
+
+                Image tileImage = r.getTileImage(i, j);
+
+                System.out.println("in setRegionView(x, y) print tileImage: ");
+                System.out.println(tileImage);
+
+                System.out.println("in setRegionView(x, y) print itle type");
+                String tileType = r.getTileType(i, j);
+
+                System.out.println("in setregion print itle type");
+
+                Image scaledTile = tileImage.getScaledInstance(32,32, Image.SCALE_DEFAULT);
+                ImageIcon icon = new ImageIcon( scaledTile );
+
+                b.setIcon(icon);
+                b.addActionListener(new ActionListener() {
+                    @Override
+                    public void actionPerformed(ActionEvent e) {
+                        System.out.println( "region: " + cords );
+                        System.out.println(tileType);
+                    }
+                });
+
+                regionViewSquares[i][j] = b;
+            }
+        }
+
+//        this.region.add(regionViewSquares);
+
+        for (int i = 0; i < dimensions; i++) {
+            for (int j = 0; j < dimensions; j++) {
+                region.add(regionViewSquares[i][j]);
+            }
+        }
+        pack();
+    }
+
 
     private void addEventListeners() {
         // the following 2 methods where adapted from

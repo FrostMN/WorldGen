@@ -15,12 +15,12 @@ public class Main {
 //        World world = new World(Size.SMALL, (long) 124);
 //        world.printWorld();
 //
-//        WorldGenGUI gui = new WorldGenGUI(world);
-
-
-        Settlement city = new Settlement(Size.SMALL);
-        Sprite hero = new Sprite("Darron");
-
-        city.printSettlement();
+////        WorldGenGUI gui = new WorldGenGUI(world);
+//
+//
+//        Settlement city = new Settlement(Size.SMALL);
+//        Sprite hero = new Sprite("Darron");
+//
+//        city.printSettlement();
     }
 }

@@ -3,14 +3,13 @@ package com.aaron.Map;
 import com.aaron.utilities.Size;
 
 import javax.imageio.ImageIO;
-import javax.swing.*;
 import java.awt.*;
 
 public class Region {
     protected int dimensions;
     private Size size;
 
-    Tile[][] tiles;
+    Tile[][] ground;
 
     Region (Size size) {
         this.size = size;
@@ -31,22 +30,30 @@ public class Region {
         return "";
     }
 
-    public ImageIcon getIcon() {
-        Image img = getImage();
-        return new ImageIcon(img.getScaledInstance(16,16, Image.SCALE_DEFAULT));
-    }
-
-    public Image getImage() {
+    // this method should be over written and should never be called
+    // but it returns a generic "region tile" for debugging
+    public Image getRegionImage() {
         try {
-            return ImageIO.read(getClass().getResource("../images/waterTile.png"));
+            return ImageIO.read(getClass().getResource("../images/regionTile.png"));
         } catch (Exception e) {
-            System.out.println(".getIMage Failed in region");
+            System.out.println(".getRegionImage Failed in region");
             return null;
         }
     }
 
+    public Image getTileImage(Integer x, Integer y) {
+        System.out.println("in getTileImage() of Region");
+        Tile t = this.ground[x][y];
+
+        return t.getImage();
+    }
+
+    public String getTileType(Integer x, Integer y) {
+        return this.ground[x][y].getType();
+    }
+
 //    public ImageIcon getTileIcon(int i, int j) {
-//        Tile t = tiles[i][j];
+//        Tile t = ground[i][j];
 //        return t.getIcon();
 //    }
 }
