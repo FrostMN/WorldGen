@@ -257,7 +257,7 @@ public class WorldGenGUI extends JFrame{
 
         JDialog mod = new JDialog(TileGui, Dialog.ModalityType.APPLICATION_MODAL);
 
-        setRegionView(WorldCords[0], WorldCords[1]);
+//        setRegionView(WorldCords[0], WorldCords[1]);
 
         // TODO need to make the gui affect the map
 

@@ -34,6 +34,8 @@ public class Tile {
                 return "src/main/java/com/aaron/images/regionTile.png";
             case ROAD:
                 return "src/main/java/com/aaron/images/roadTile.png";
+            case WALL:
+                return "src/main/java/com/aaron/images/wallTile.png";
             default:
                 return "src/main/java/com/aaron/images/regionTile.png";
         }
