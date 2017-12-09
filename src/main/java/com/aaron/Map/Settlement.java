@@ -4,56 +4,60 @@ package com.aaron.Map;
 import com.aaron.utilities.Size;
 
 import javax.imageio.ImageIO;
-import javax.swing.*;
 import java.awt.*;
+import java.io.File;
 
 public class Settlement extends Region {
-    private Floor[] floors;
+//    private Floor[] floors;
 
     public Settlement(Size size) {
         super(size);
-        this.floors = new Floor[] {
-                new Floor(this.dimensions),
-                new Floor(this.dimensions),
-                new Floor(this.dimensions),
-                new Floor(this.dimensions) };
-    }
+        ground = new Tile[this.dimensions][this.dimensions];
 
-    public void printSettlement() {
-        for (int i = this.floors.length - 1; i >= 0; i--) {
-            System.out.println("floor #" + i);
-            System.out.println(this.floors[i]);
+        for (int i = 0; i < this.dimensions; i++) {
+            for (int j = 0; j < this.dimensions; j++) {
+                ground[i][j] = new Tile(Terrain.PLAINS);
+            }
         }
     }
+
 
     @Override
     public String toString() {
         switch (this.dimensions) {
             case 16:
                 return ".";
-            case 32:
+            case 18:
                 return "+";
             default:
                 return "*";
         }
     }
 
-//    @Override
-//    public ImageIcon getIcon() {
-//        Image img = getImage();
-//        return new ImageIcon(img.getScaledInstance(16,16, Image.SCALE_DEFAULT));
-//    }
+    @Override
+    public String getMap() {
+        String map = "";
+        for (int i = 0; i < this.dimensions; i++) {
+            for (int j = 0; j < this.dimensions; j++) {
+                map += this.ground[i][j];
+            }
+            map += "\n";
+        }
+        return map;
+    }
 
-//    @Override
-//    public Image getImage() {
-//        try {
-//            Image img = ImageIO.read(getClass().getResource("../images/townTile.png"));
-//            return img;
-//        } catch (Exception e) {
-//            System.out.println(".getIMage Failed in plains");
-//            return null;
-//        }
-//    }
-
+    @Override
+    public Image getRegionImage() {
+        Image img;
+        File f = new File("src/main/java/com/aaron/images/townTile.png");
+        try {
+            img = ImageIO.read(f);
+            return img;
+        } catch (Exception e) {
+            System.out.println(".getImage Failed in plains");
+            System.out.println(e);
+            return null;
+        }
+    }
 
 }

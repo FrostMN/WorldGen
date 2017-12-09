@@ -3,7 +3,6 @@ package com.aaron.Map;
 import com.aaron.utilities.Size;
 
 import javax.imageio.ImageIO;
-import javax.swing.*;
 import java.awt.*;
 import java.io.File;
 
@@ -12,14 +11,11 @@ public class Mountain extends Region {
 //    Tile[][] ground;
     Mountain(Size size) {
         super(size);
-
         ground = new Tile[this.dimensions][this.dimensions];
-
-        Tile mtn = new Tile(2);
 
         for (int i = 0; i < this.dimensions; i++) {
             for (int j = 0; j < this.dimensions; j++) {
-                ground[i][j] = mtn;
+                ground[i][j] = new Tile(Terrain.MOUNTAIN);
             }
         }
     }

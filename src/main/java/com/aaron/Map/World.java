@@ -39,13 +39,7 @@ public class World {
         for (int i = 0; i < this.dimensions; i++) {
             for (int j = 0; j < this.dimensions; j++) {
 
-//                System.out.println("World - X: " + i + ", Y: " + j );
-//                System.out.println(" is a plain");
-
-//                System.out.println("before plain init");
                 Plain pl = new Plain(size);
-
-//                System.out.println(pl);
 
                 regions[i][j] = pl;
             }
@@ -60,7 +54,7 @@ public class World {
         placeMountians(this.seed);
         placeRivers();
         placeForest();
-//        placeCities(this.seed);
+        placeCities(this.seed);
     }
 
     private void placeMountians(Long seed) {

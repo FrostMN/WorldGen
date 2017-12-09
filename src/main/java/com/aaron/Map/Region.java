@@ -52,6 +52,10 @@ public class Region {
         return this.ground[x][y].getType();
     }
 
+    public void setTile(Integer x, Integer y, Terrain type) {
+        this.ground[x][y].setType(type);
+    }
+
 //    public ImageIcon getTileIcon(int i, int j) {
 //        Tile t = ground[i][j];
 //        return t.getIcon();

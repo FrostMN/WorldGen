@@ -6,59 +6,50 @@ import java.awt.*;
 import java.io.File;
 
 public class Tile {
-    private int type;
-    private Image image;
+    private Terrain type;
+    private String image;
 
-    Tile(int type) {
+    Tile(Terrain type) {
         this.type = type;
+        this.image = setImage(this.type);
+    }
 
-        File f;
-
-        try {
-            switch (this.type) {
-                case 0:
-                    String imageFileName = "src/main/java/com/aaron/images/regionTile.png";
-                    f = new File(imageFileName);
-                    this.image = ImageIO.read(f);
-                    break;
-                case 1:
-                    imageFileName = "src/main/java/com/aaron/images/grassTile.png";
-                    f = new File(imageFileName);
-                    this.image = ImageIO.read(f);
-                    break;
-                case 2:
-                    imageFileName = "src/main/java/com/aaron/images/mountainTile.png";
-                    f = new File(imageFileName);
-                    this.image = ImageIO.read(f);
-                    break;
-                case 3:
-                    imageFileName = "src/main/java/com/aaron/images/regionTile.png";
-                    f = new File(imageFileName);
-                    this.image = ImageIO.read(f);
-                    break;
-                default:
-                    imageFileName = "src/main/java/com/aaron/images/regionTile.png";
-                    f = new File(imageFileName);
-                    this.image = ImageIO.read(f);
-                    break;
-            }
-        } catch (Exception e) {
-            this.image = null;
+    private String setImage(Terrain type) {
+        switch (type) {
+            case PLAINS:
+                return "src/main/java/com/aaron/images/grassTile.png";
+            case MOUNTAIN:
+                return "src/main/java/com/aaron/images/mountainTile.png";
+            case SETTLEMENT:
+                return "src/main/java/com/aaron/images/townTile.png";
+            case CAVE:
+                return "src/main/java/com/aaron/images/caveTile.png";
+            case OCEAN:
+                return "src/main/java/com/aaron/images/waterTile.png";
+            case DIRT:
+                return "src/main/java/com/aaron/images/dirtTile.png";
+            case AIR:
+                return "src/main/java/com/aaron/images/airTile.png";
+            case FOREST:
+                return "src/main/java/com/aaron/images/regionTile.png";
+            case ROAD:
+                return "src/main/java/com/aaron/images/roadTile.png";
+            default:
+                return "src/main/java/com/aaron/images/regionTile.png";
         }
-
     }
 
     @Override
     public String toString() {
         switch (this.type) {
-            case 0:
-                return "#";
-            case 1:
+            case PLAINS:
+                return "~";
+            case SETTLEMENT:
                 return "_";
-            case 2:
+            case MOUNTAIN:
                 return "^";
             default:
-                return " ";
+                return "NEEDS A toString() added in Tile.java";
         }
     }
 
@@ -67,31 +58,40 @@ public class Tile {
     }
 
     Image getImage() {
-        System.out.println("In Tile.getImage()");
-        System.out.println(this.type);
-        System.out.println(this.image);
-        return this.image;
+        File f;
+        try {
+            f = new File(this.image);
+            return ImageIO.read(f);
+        } catch (Exception e) {
+            return null;
+        }
     }
 
     public String getType() {
-        String type;
         switch (this.type) {
-            case 0:
-                type = "generic";
-                break;
-            case 1:
-                type = "grass";
-                break;
-            case 2:
-                type = "mountain";
-                break;
-            case 3:
-                type = "generic";
-                break;
+            case PLAINS:
+                return "Grass";
+            case MOUNTAIN:
+                return "Mountain";
+            case SETTLEMENT:
+                return "Town";
+            case CAVE:
+                return "Cave";
+            case OCEAN:
+                return "Water";
+            case DIRT:
+                return "Dirt";
+            case AIR:
+                return "Air";
+            case FOREST:
+                return "Forest";
             default:
-                type = "generic";
-                break;
+                return "NEEDS A getType() added in Tile.java";
         }
-        return type;
+    }
+
+    public void setType(Terrain type) {
+        this.type = type;
+        this.image = setImage(type);
     }
 }

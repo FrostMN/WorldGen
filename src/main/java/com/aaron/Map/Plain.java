@@ -3,7 +3,6 @@ package com.aaron.Map;
 import com.aaron.utilities.Size;
 
 import javax.imageio.ImageIO;
-import javax.swing.*;
 import java.awt.*;
 import java.io.File;
 
@@ -15,11 +14,10 @@ public class Plain extends Region {
 
         ground = new Tile[this.dimensions][this.dimensions];
 
-        Tile grass = new Tile(1);
-
         for (int i = 0; i < this.dimensions; i++) {
             for (int j = 0; j < this.dimensions; j++) {
-                ground[i][j] = grass;
+                System.out.println("generting grass");
+                ground[i][j] = new Tile(Terrain.PLAINS);
             }
         }
     }
